@@ -15,4 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *itemname;
 //@property (strong, nonatomic) NSString *userid;
+
+-(IBAction)textFieldReturn:(id)sender;
+-(IBAction)postItem:(id)sender;
 @end

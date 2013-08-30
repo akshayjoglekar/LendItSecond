@@ -17,6 +17,11 @@
 @implementation LendStuffViewController
 @synthesize itemname;
 
+-(IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -63,7 +68,8 @@
     }
 }
 
-- (void) postItem
+
+-(IBAction)postItem:(id)sender;
 {
     NSString *urlString = [NSString stringWithFormat:@"http://localhost:8080/postitem?itemname=%@&username=%@", self.itemname.text, @"userid"];
     
@@ -81,10 +87,11 @@
     urlData = [NSURLConnection sendSynchronousRequest:urlRequest
                                     returningResponse:&response
                                                 error:&error];
-    
     // Construct a String around the Data from the response
     NSString * alertMessage = @"Your item has been successfully posted";
     NSString *responseString = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+    NSLog(@"Invoked URL. responseString = %@", responseString);
+
     if([responseString rangeOfString:@"ErrorCode=0"].location == NSNotFound) {
         alertMessage = @"There was an error posting your item. Please try again later";
     }
