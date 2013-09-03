@@ -71,7 +71,9 @@
 
 -(IBAction)postItem:(id)sender;
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://localhost:8080/postitem?itemname=%@&username=%@", self.itemname.text, @"userid"];
+    //NSString *urlString = [NSString stringWithFormat:@"http://localhost:8080/postitem?itemname=%@&username=%@", self.itemname.text, @"userid"];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.1.122:8080/lendit/process?reqtype=postitem&itemname=%@&username=%@", self.itemname.text, @"userid"];
     
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -92,7 +94,7 @@
     NSString *responseString = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
     NSLog(@"Invoked URL. responseString = %@", responseString);
 
-    if([responseString rangeOfString:@"ErrorCode=0"].location == NSNotFound) {
+    if([responseString rangeOfString:@"Result=0"].location == NSNotFound) {
         alertMessage = @"There was an error posting your item. Please try again later";
     }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
